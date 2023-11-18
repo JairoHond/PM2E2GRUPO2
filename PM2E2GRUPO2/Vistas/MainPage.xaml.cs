@@ -1,4 +1,5 @@
 using Firebase.Database;
+using Firebase.Database.Query;
 using PM2E2GRUPO2.Modelos;
 using System.Collections.ObjectModel;
 namespace PM2E2GRUPO2.Vistas;
@@ -50,5 +51,34 @@ public partial class MainPage : ContentPage
 		};
 		await Shell.Current.GoToAsync(nameof(VistaPage), parametro);
 	}
+
+    private async void Eliminar_Clicked(object sender, EventArgs e)
+    {
+        // Obtener el contexto del elemento de la lista al que se le hizo clic en el botón
+        var button = sender as Button;
+        var empleado = button?.BindingContext as Empleado;
+
+        if (empleado != null)
+        {
+            // Realizar la eliminación en Firebase
+            await client.Child("Empleados").Child(empleado.Id.ToString()).DeleteAsync();
+
+            // Eliminar el elemento de la lista localmente
+            Lista.Remove(empleado);
+
+            Console.WriteLine($"Intentando eliminar registro con Id: {empleado.Id}");
+
+            try
+            {
+                await client.Child("Empleados").Child(empleado.Id).DeleteAsync();
+                Lista.Remove(empleado);
+                Console.WriteLine("Registro eliminado correctamente en Firebase.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar registro en Firebase: {ex.Message}");
+            }
+        }
+    }
 
 }

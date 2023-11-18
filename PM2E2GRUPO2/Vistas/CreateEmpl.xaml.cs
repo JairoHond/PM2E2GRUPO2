@@ -2,17 +2,24 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using PM2E2GRUPO2.Modelos;
 using Firebase.Storage;
+using Plugin.Maui.Audio;
 namespace PM2E2GRUPO2.Vistas;
 
 public partial class CreateEmpl : ContentPage
 {
 	FirebaseClient client = new FirebaseClient("https://basegrupo2-default-rtdb.firebaseio.com/");
     private string Urlfoto {  get; set; }
-	public CreateEmpl()
+    readonly IAudioManager _audioManager;
+    readonly IAudioRecorder _audioRecorder;
+	public CreateEmpl(IAudioManager audioManager)
 	{
 		InitializeComponent();
+        _audioManager = audioManager;
+        _audioRecorder = audioManager.CreateRecorder();
         BindingContext = this;
-	}
+        GenerarNumero();
+
+    }
 
 	private async void Guardar_Clicked(object sender, EventArgs e)
 	{
@@ -22,8 +29,10 @@ public partial class CreateEmpl : ContentPage
         }
         else
         {
+
             await client.Child("Empleados").PostAsync(new Empleado
             {
+                Id = entryNumero.Text,
                 descripcion = txtDesc.Text,
                 latitud = LatitudeEntry.Text,
                 longitud = LongitudeEntry.Text,
@@ -31,8 +40,19 @@ public partial class CreateEmpl : ContentPage
             });
             await Shell.Current.GoToAsync("..");
             alertP();
+       
+        
         }
 	}
+
+    private void GenerarNumero()
+    {
+        Random random = new Random();
+        int numeroAleatorio = random.Next(1, 100); // Genera un número aleatorio entre 1 y 100
+
+        // Asigna el número aleatorio al Entry
+        entryNumero.Text = numeroAleatorio.ToString();
+    }
 
     private async void ObtenerUbicacion_Clicked(object sender, EventArgs e)
     {
@@ -69,6 +89,24 @@ public partial class CreateEmpl : ContentPage
         {
             // Otro error
             await DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
+
+    private async void Guardar_Audio(object sender, EventArgs e)
+    {
+        if(await Permissions.RequestAsync<Permissions.Microphone>()!=PermissionStatus.Granted)
+        {
+            return;
+        }
+        if (!_audioRecorder.IsRecording)
+        {
+            await _audioRecorder.StartAsync();
+        }
+        else
+        {
+            var recorderdAudio=await _audioRecorder.StopAsync();
+            var player = AudioManager.Current.CreatePlayer(recorderdAudio.GetAudioStream());
+            player.Play();
         }
     }
 

@@ -59,6 +59,12 @@
                             <Label Grid.Row="1"
                                    Grid.Column="1"
                                    Text="{Binding Empelado.descripcion}"/>
+
+                            <!-- Agregar el botón de eliminación -->
+                            <Button Grid.Row="0"
+                Grid.Column="2"
+                Text="Eliminar"
+                Clicked="Eliminar_Clicked"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

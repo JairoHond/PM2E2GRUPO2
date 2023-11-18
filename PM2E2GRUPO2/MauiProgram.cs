@@ -2,6 +2,8 @@
 using Firebase.Database;
 using Firebase.Database.Query;
 using PM2E2GRUPO2.Modelos;
+using Plugin.Maui.Audio;
+using PM2E2GRUPO2.Vistas;
 namespace PM2E2GRUPO2
 {
     public static class MauiProgram
@@ -16,9 +18,11 @@ namespace PM2E2GRUPO2
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.Services.AddSingleton(AudioManager.Current);
+            builder.Services.AddTransient<CreateEmpl>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             Registro();
             return builder.Build();
