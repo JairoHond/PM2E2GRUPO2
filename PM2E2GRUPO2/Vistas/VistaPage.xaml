@@ -7,9 +7,13 @@
         <Image Source="{Binding Detalle.Urlfoto}"
                Aspect="AspectFit"
                HeightRequest="200"/>
-
+        <Label Text="ID"/>
+        <Label Text="{Binding Detalle.Id}"/>
+        <Label Text="Descripcion"/>
         <Label Text="{Binding Detalle.descripcion}"/>
+            <Label Text="Latitud"/>
         <Label Text="{Binding Detalle.latitud}"/>
+            <Label Text="Longitud"/>
         <Label Text="{Binding Detalle.longitud}"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -11,15 +11,18 @@ public partial class CreateEmpl : ContentPage
     private string Urlfoto {  get; set; }
     readonly IAudioManager _audioManager;
     readonly IAudioRecorder _audioRecorder;
-	public CreateEmpl(IAudioManager audioManager)
+    private Empleado alumnosService;
+    public CreateEmpl(IAudioManager audioManager)
 	{
 		InitializeComponent();
         _audioManager = audioManager;
         _audioRecorder = audioManager.CreateRecorder();
         BindingContext = this;
+        alumnosService = new Empleado();
         GenerarNumero();
 
     }
+
 
 	private async void Guardar_Clicked(object sender, EventArgs e)
 	{
@@ -29,15 +32,20 @@ public partial class CreateEmpl : ContentPage
         }
         else
         {
+            int currentCounter = await alumnosService.GetCounterAsync();
+            int newId = currentCounter + 1;
 
-            await client.Child("Empleados").PostAsync(new Empleado
+     
+
+            await client.Child("Empleados").Child(newId.ToString()).PutAsync(new Empleado
             {
-                Id = entryNumero.Text,
+                Id = newId.ToString(),
                 descripcion = txtDesc.Text,
                 latitud = LatitudeEntry.Text,
                 longitud = LongitudeEntry.Text,
                 Urlfoto=Urlfoto
             });
+            await alumnosService.UpdateCounterAsync(newId);
             await Shell.Current.GoToAsync("..");
             alertP();
        

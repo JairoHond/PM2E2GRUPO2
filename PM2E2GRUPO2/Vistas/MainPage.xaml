@@ -32,13 +32,15 @@
                             SelectionChanged="listaCollection_SelectionChanged"
                 Grid.Row="1"
                 Grid.ColumnSpan="2">
-                
+
+
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnSpacing="10" Padding="5">
                             <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -61,14 +63,13 @@
                                    Text="{Binding Empelado.descripcion}"/>
 
                             <!-- Agregar el botón de eliminación -->
-                            <Button Grid.Row="0"
-                Grid.Column="2"
-                Text="Eliminar"
-                Clicked="Eliminar_Clicked"/>
+                            <Button Grid.Row="1" Grid.Column="1" Text="Eliminar" Clicked="Eliminar_Clicked"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+           
         </Grid>
         
     </ScrollView>

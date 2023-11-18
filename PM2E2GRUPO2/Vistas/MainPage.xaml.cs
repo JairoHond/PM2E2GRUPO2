@@ -16,17 +16,34 @@ public partial class MainPage : ContentPage
 	}
 	public void CargarLista()
 	{
-		client.Child("Empleados")
-			.AsObservable<Empleado>()
-			.Subscribe((empleado) =>
-			{
-				if(empleado.Object != null)
-				{
-					Lista.Add(empleado.Object);
-				}
-			});
-	}
-	private async void nuevoReg_Clicked(object sender, EventArgs e)
+        client.Child("Empleados")
+        .AsObservable<Empleado>()
+        .Subscribe((empleado) =>
+        {
+            if (empleado.EventType == Firebase.Database.Streaming.FirebaseEventType.Delete)
+            {
+                // Eliminar el elemento de la lista local
+                var empleadoToDelete = Lista.FirstOrDefault(e => e.Id == empleado.Object.Id);
+                if (empleadoToDelete != null)
+                {
+                    Lista.Remove(empleadoToDelete);
+                }
+            }
+            else if (empleado.Object != null)
+            {
+                // Agregar o actualizar el elemento en la lista local
+                var existingEmpleado = Lista.FirstOrDefault(e => e.Id == empleado.Object.Id);
+                if (existingEmpleado != null)
+                {
+                    // Actualizar el elemento existente
+                    Lista.Remove(existingEmpleado);
+                }
+
+                Lista.Add(empleado.Object);
+            }
+        });
+    }
+    private async void nuevoReg_Clicked(object sender, EventArgs e)
 	{
 		await Shell.Current.GoToAsync(nameof(CreateEmpl));
 	}
@@ -52,32 +69,35 @@ public partial class MainPage : ContentPage
 		await Shell.Current.GoToAsync(nameof(VistaPage), parametro);
 	}
 
+
     private async void Eliminar_Clicked(object sender, EventArgs e)
     {
-        // Obtener el contexto del elemento de la lista al que se le hizo clic en el botón
-        var button = sender as Button;
-        var empleado = button?.BindingContext as Empleado;
-
-        if (empleado != null)
+        if (sender is Button button && button.BindingContext is Empleado empleado)
         {
-            // Realizar la eliminación en Firebase
-            await client.Child("Empleados").Child(empleado.Id.ToString()).DeleteAsync();
+            // Llamada a la función para eliminar el registro de Firebase
+            await EliminarRegistroFirebase(empleado.Id);
+        }
+    }
 
-            // Eliminar el elemento de la lista localmente
-            Lista.Remove(empleado);
+    private async Task EliminarRegistroFirebase(string empleadoId)
+    {
+        try
+        {
+            var empleadoToDelete = Lista.FirstOrDefault(e => e.Id == empleadoId);
 
-            Console.WriteLine($"Intentando eliminar registro con Id: {empleado.Id}");
-
-            try
+            if (empleadoToDelete != null)
             {
-                await client.Child("Empleados").Child(empleado.Id).DeleteAsync();
-                Lista.Remove(empleado);
-                Console.WriteLine("Registro eliminado correctamente en Firebase.");
+                // Eliminar el registro de Firebase
+                await client.Child("Empleados").Child(empleadoId).DeleteAsync();
+
+                // Eliminar el registro de la lista local
+                Lista.Remove(empleadoToDelete);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al eliminar registro en Firebase: {ex.Message}");
-            }
+        }
+        catch (Exception ex)
+        {
+            // Manejar cualquier error que pueda ocurrir durante la eliminación
+            Console.WriteLine($"Error al eliminar el registro: {ex.Message}");
         }
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E2GRUPO2.Vistas.UpdatePage"
+             Title="UpdatePage">
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <Image Source="{Binding Detalle.Urlfoto}"
+               Aspect="AspectFit"
+               HeightRequest="200"/>
+        <Label Text="ID"/>
+        <Entry Text="{Binding Detalle.Id}" IsEnabled="False" />
+        <Label Text="Descripcion"/>
+        <Entry Text="{Binding Detalle.descripcion}"  />
+        <Label Text="Latitud"/>
+        <Entry Text="{Binding Detalle.latitud}"  />
+        <Label Text="Longitud"/>
+        <Entry Text="{Binding Detalle.longitud}"  />
+
+        <!-- Agrega un EditText editable -->
+
+        <!-- Agrega un botón para realizar alguna acción con el texto ingresado -->
+        <Button Text="Actualizar"/>
+    </VerticalStackLayout>
+</ContentPage>
