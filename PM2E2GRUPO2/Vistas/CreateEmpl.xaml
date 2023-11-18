@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E2GRUPO2.Vistas.CreateEmpl"
+             Title="CreateEmpl">
+    <StackLayout>
+        <Grid ColumnDefinitions="*,120" VerticalOptions="Center">
+            <Image x:Name="fotoImage"
+                   Source="user.jpg"
+                   HeightRequest="200"
+                   Aspect="AspectFit"
+                   Grid.Column="0"/>
+
+            <Button Text="Elegir Imagen"
+                    x:Name="SeleccionarImagen"
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    Clicked="SeleccionarImagen_Clicked"/>
+        </Grid>
+        
+        <Entry Placeholder="Ingrese una Descripcion" 
+            Margin="10,40,10,10" 
+            x:Name="txtDesc"/>
+
+        <StackLayout>
+            <Entry x:Name="LatitudeEntry" Placeholder="Latitud" IsReadOnly="True" />
+            <Entry x:Name="LongitudeEntry" Placeholder="Longitud" IsReadOnly="True" />
+            <Button Text="Obtener Ubicación" Clicked="ObtenerUbicacion_Clicked" />
+        </StackLayout>
+
+        
+
+        <Button Text="Guardar" 
+        BackgroundColor="Aqua"
+        x:Name="B_Ver" 
+        Clicked="Guardar_Clicked"/>
+
+
+    </StackLayout>
+</ContentPage>

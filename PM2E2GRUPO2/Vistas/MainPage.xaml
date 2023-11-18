@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM2E2GRUPO2.Vistas.MainPage"
+             Title="Lista de Registros">
+    <ScrollView>
+        <Grid Padding="10" RowSpacing="10" ColumnSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <SearchBar Placeholder="Busar..."
+                       x:Name="filtroEntry"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       TextChanged="filtroEntry_TextChanged"/>
+
+            <Button Text="Nuevo Registro"
+                    x:Name="nuevoReg"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="nuevoReg_Clicked"/>
+
+            <CollectionView x:Name="listaCollection"
+                ItemsSource="{Binding Lista}"
+                            SelectionMode="Single"
+                            SelectionChanged="listaCollection_SelectionChanged"
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="10" Padding="5">
+                            <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.RowSpan="2"
+                                   Source="{Binding Urlfoto}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60"/>
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text= "{Binding descripcion}"
+                                   FontAttributes="Bold"
+                                   FontSize="15"/>
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Empelado.descripcion}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        
+    </ScrollView>
+</ContentPage>
