@@ -2,23 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PM2E2GRUPO2.Vistas.UpdatePage"
-             Title="UpdatePage">
-    <VerticalStackLayout Padding="10" Spacing="10">
-        <Image Source="{Binding Detalle.Urlfoto}"
-               Aspect="AspectFit"
-               HeightRequest="200"/>
-        <Label Text="ID"/>
-        <Entry Text="{Binding Detalle.Id}" IsEnabled="False" />
-        <Label Text="Descripcion"/>
-        <Entry Text="{Binding Detalle.descripcion}"  />
-        <Label Text="Latitud"/>
-        <Entry Text="{Binding Detalle.latitud}"  />
-        <Label Text="Longitud"/>
-        <Entry Text="{Binding Detalle.longitud}"  />
+             Title="Actualizar Registro">
 
-        <!-- Agrega un EditText editable -->
+    <StackLayout>
+        <!-- Agrega aquí tus campos de edición, por ejemplo: -->
+        <Entry Placeholder="Desc" Text="{Binding descripcion}" />
+        <Entry Placeholder="Lat" Text="{Binding latitud}" />
+        <Entry Placeholder="Lot" Text="{Binding longitud}" />
+        <!-- Agrega más campos según sea necesario -->
 
-        <!-- Agrega un botón para realizar alguna acción con el texto ingresado -->
-        <Button Text="Actualizar"/>
-    </VerticalStackLayout>
+        <!-- Agrega un botón para guardar los cambios -->
+    </StackLayout>
 </ContentPage>

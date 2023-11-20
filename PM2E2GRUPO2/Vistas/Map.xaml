@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             x:Class="PM2E2GRUPO2.Vistas.Map"
+             Title="Map">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Mitad superior de la pantalla -->
+            <RowDefinition Height="*" />
+            <!-- Mitad inferior de la pantalla -->
+        </Grid.RowDefinitions>
+
+        <!-- Contenido superior de la pantalla -->
+        <Label Text="Contenido Superior" Grid.Row="0" />
+        <maps:Map x:Name="map" IsTrafficEnabled="True" MapType="Street" IsShowingUser="True" IsZoomEnabled="True" IsScrollEnabled="True">
+            <maps:Map.Pins>
+                <maps:Pin Label="California"
+                          Address="Hola"
+                          Type="Place">
+
+                    <maps:Pin.Location>
+                        <sensors:Location>
+                            <x:Arguments>
+                                <x:Double>36.9628066</x:Double>
+                                <x:Double>-122.0194722</x:Double>
+                            </x:Arguments>
+                        </sensors:Location>
+                    </maps:Pin.Location>
+                </maps:Pin>
+            </maps:Map.Pins>
+
+        </maps:Map>
+    </Grid>
+</ContentPage>

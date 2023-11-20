@@ -5,6 +5,8 @@ namespace PM2E2GRUPO2.Vistas;
 
 public partial class VistaPage : ContentPage
 {
+	private double Latitud;
+    private double Longitud;
 	Empleado detalle;
 	public Empleado Detalle {
 		get => detalle;
@@ -19,4 +21,6 @@ public partial class VistaPage : ContentPage
 		InitializeComponent();
 		BindingContext = this;
 	}
+
+
 }

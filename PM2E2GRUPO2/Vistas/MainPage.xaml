@@ -63,6 +63,7 @@
                                    Text="{Binding Empelado.descripcion}"/>
 
                             <!-- Agregar el botón de eliminación -->
+                            
                             <Button Grid.Row="1" Grid.Column="1" Text="Eliminar" Clicked="Eliminar_Clicked"/>
                         </Grid>
                     </DataTemplate>

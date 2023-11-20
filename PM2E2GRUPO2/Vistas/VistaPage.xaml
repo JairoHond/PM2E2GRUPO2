@@ -1,19 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+                xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              x:Class="PM2E2GRUPO2.Vistas.VistaPage"
              Title="CardView">
-    <VerticalStackLayout Padding="10" Spacing="10">
-        <Image Source="{Binding Detalle.Urlfoto}"
-               Aspect="AspectFit"
-               HeightRequest="200"/>
-        <Label Text="ID"/>
-        <Label Text="{Binding Detalle.Id}"/>
-        <Label Text="Descripcion"/>
-        <Label Text="{Binding Detalle.descripcion}"/>
-            <Label Text="Latitud"/>
-        <Label Text="{Binding Detalle.latitud}"/>
-            <Label Text="Longitud"/>
-        <Label Text="{Binding Detalle.longitud}"/>
-    </VerticalStackLayout>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Mitad superior de la pantalla -->
+            <RowDefinition Height="*" />
+            <!-- Mitad inferior de la pantalla -->
+        </Grid.RowDefinitions>
+
+        <!-- Contenido superior de la pantalla -->
+        <VerticalStackLayout Padding="10" Spacing="10" Grid.Row="0">
+            <Image Source="{Binding Detalle.Urlfoto}"
+                   Aspect="AspectFit"
+                   HeightRequest="200"/>
+            <Label Text="Descripcion"/>
+            <Label Text="{Binding Detalle.descripcion}"/>
+            <Label Text="Latitud y Longitud"/>
+            <Label Text="{Binding Detalle.latitud}"/>
+            <Label Text="{Binding Detalle.longitud}"/>
+        </VerticalStackLayout>
+
+        <!-- Mapa en la mitad inferior de la pantalla -->
+        <maps:Map x:Name="map" IsTrafficEnabled="True" MapType="Street" IsShowingUser="True" IsZoomEnabled="True" IsScrollEnabled="True" Grid.Row="1">
+            <maps:Map.Pins>
+                <maps:Pin Label="Ubicacion Actual"
+                          Address="Hola"
+                          Type="Place">
+
+                    <maps:Pin.Location>
+                        <sensors:Location>
+                            <x:Arguments>
+                                <x:Double>{Binding Detalle.latitud}</x:Double>
+                                <x:Double>{Binding Detalle.longitud}</x:Double>
+                            </x:Arguments>
+                        </sensors:Location>
+                    </maps:Pin.Location>
+                </maps:Pin>
+            </maps:Map.Pins>
+        </maps:Map>
+    </Grid>
 </ContentPage>

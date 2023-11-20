@@ -35,7 +35,6 @@ public partial class CreateEmpl : ContentPage
             int currentCounter = await alumnosService.GetCounterAsync();
             int newId = currentCounter + 1;
 
-     
 
             await client.Child("Empleados").Child(newId.ToString()).PutAsync(new Empleado
             {
