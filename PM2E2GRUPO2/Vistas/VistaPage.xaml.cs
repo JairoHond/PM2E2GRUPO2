@@ -15,6 +15,7 @@ public partial class VistaPage : ContentPage
 			detalle = value;
 			OnPropertyChanged();
         }
+
 	}
 	public VistaPage()
 	{

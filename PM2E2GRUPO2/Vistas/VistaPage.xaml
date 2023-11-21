@@ -36,8 +36,8 @@
                     <maps:Pin.Location>
                         <sensors:Location>
                             <x:Arguments>
-                                <x:Double>37.421998333333385</x:Double>
-                                <x:Double>-122.084</x:Double>
+                                <x:Double>15.784081</x:Double>
+                                <x:Double>-86.7794123</x:Double>
                             </x:Arguments>
                         </sensors:Location>
                     </maps:Pin.Location>

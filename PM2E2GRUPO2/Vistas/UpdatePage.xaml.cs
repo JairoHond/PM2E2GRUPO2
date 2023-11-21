@@ -5,6 +5,7 @@ namespace PM2E2GRUPO2.Vistas;
 public partial class UpdatePage : ContentPage
 {
     Empleado detalle;
+
     public Empleado Detalle
     {
         get => detalle;

@@ -103,10 +103,18 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void actualizarBtn_Clicked(object sender, EventArgs e)
+    private async void Actualizar_Clicked(object sender, EventArgs e)
     {
-        // Aquí realizas la navegación a la nueva página (NuevaPagina)
-        Navigation.PushAsync(new UpdatePage());
+        if (sender is Button button && button.BindingContext is Empleado empleado)
+        {
+            // Obtener la información del empleado seleccionado
+            var empleadoToUpdate = Lista.FirstOrDefault(emp => emp.Id == empleado.Id);
+
+            // Redirigir a la página de actualización pasando los datos del empleado
+            await Shell.Current.GoToAsync($"//UpdatePage?id={empleadoToUpdate.Id}&descripcion={empleadoToUpdate.descripcion}&latitud={empleadoToUpdate.latitud}&longitud={empleadoToUpdate.longitud}");
+        }
     }
+
+
 
 }

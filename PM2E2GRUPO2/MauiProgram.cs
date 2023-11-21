@@ -23,6 +23,7 @@ namespace PM2E2GRUPO2
             builder.Services.AddSingleton(AudioManager.Current);
             builder.Services.AddTransient<CreateEmpl>();
 
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

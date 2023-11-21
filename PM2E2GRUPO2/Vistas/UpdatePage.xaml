@@ -11,11 +11,12 @@
                Aspect="AspectFit"
                HeightRequest="200"/>
         <Label Text="{Binding Detalle.Id}"/>
+        <Entry x:Name="idText" Text="{Binding Detalle.Id}" />
         <Label Text="Descripcion"/>
-        <Entry Text="{Binding Detalle.descripcion}" />
+        <Entry x:Name="desc" Text="{Binding Detalle.descripcion}" />
         <Label Text="Latitud"/>
-        <Entry Text="{Binding Detalle.latitud}" />
-        <Label Text="Longitud"/>
+        <Entry x:Name="lat" Text="{Binding Detalle.latitud}" />
+        <Label x:Name="lot" Text="Longitud"/>
         <Entry Text="{Binding Detalle.longitud}" />
     </VerticalStackLayout>
 </ContentPage>
