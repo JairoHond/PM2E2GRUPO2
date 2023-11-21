@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              x:Class="PM2E2GRUPO2.Vistas.UpdatePage"
              Title="Actualizar Registro">
 
-    <StackLayout>
-        <!-- Agrega aquí tus campos de edición, por ejemplo: -->
-        <Entry Placeholder="Desc" Text="{Binding descripcion}" />
-        <Entry Placeholder="Lat" Text="{Binding latitud}" />
-        <Entry Placeholder="Lot" Text="{Binding longitud}" />
-        <!-- Agrega más campos según sea necesario -->
-
-        <!-- Agrega un botón para guardar los cambios -->
-    </StackLayout>
+    <VerticalStackLayout Padding="10" Spacing="10" Grid.Row="0">
+        <Image Source="{Binding Detalle.Urlfoto}"
+               Aspect="AspectFit"
+               HeightRequest="200"/>
+        <Label Text="{Binding Detalle.Id}"/>
+        <Label Text="Descripcion"/>
+        <Entry Text="{Binding Detalle.descripcion}" />
+        <Label Text="Latitud"/>
+        <Entry Text="{Binding Detalle.latitud}" />
+        <Label Text="Longitud"/>
+        <Entry Text="{Binding Detalle.longitud}" />
+    </VerticalStackLayout>
 </ContentPage>

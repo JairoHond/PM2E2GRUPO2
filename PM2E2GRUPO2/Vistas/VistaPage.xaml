@@ -19,6 +19,7 @@
             <Image Source="{Binding Detalle.Urlfoto}"
                    Aspect="AspectFit"
                    HeightRequest="200"/>
+
             <Label Text="Descripcion"/>
             <Label Text="{Binding Detalle.descripcion}"/>
             <Label Text="Latitud y Longitud"/>
@@ -30,14 +31,13 @@
         <maps:Map x:Name="map" IsTrafficEnabled="True" MapType="Street" IsShowingUser="True" IsZoomEnabled="True" IsScrollEnabled="True" Grid.Row="1">
             <maps:Map.Pins>
                 <maps:Pin Label="Ubicacion Actual"
-                          Address="Hola"
-                          Type="Place">
-
+                  Address="Hola"
+                  Type="Place">
                     <maps:Pin.Location>
                         <sensors:Location>
                             <x:Arguments>
-                                <x:Double>{Binding Detalle.latitud}</x:Double>
-                                <x:Double>{Binding Detalle.longitud}</x:Double>
+                                <x:Double>37.421998333333385</x:Double>
+                                <x:Double>-122.084</x:Double>
                             </x:Arguments>
                         </sensors:Location>
                     </maps:Pin.Location>

@@ -1,5 +1,6 @@
 using Firebase.Database;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
 using PM2E2GRUPO2.Modelos;
 using System.Collections.ObjectModel;
 namespace PM2E2GRUPO2.Vistas;
@@ -14,7 +15,8 @@ public partial class MainPage : ContentPage
 		BindingContext = this;
 		CargarLista();
 	}
-	public void CargarLista()
+
+    public void CargarLista()
 	{
         client.Child("Empleados")
         .AsObservable<Empleado>()
@@ -101,6 +103,10 @@ public partial class MainPage : ContentPage
         }
     }
 
-    
+    private void actualizarBtn_Clicked(object sender, EventArgs e)
+    {
+        // Aquí realizas la navegación a la nueva página (NuevaPagina)
+        Navigation.PushAsync(new UpdatePage());
+    }
 
 }
